@@ -1,0 +1,1 @@
+# beautiful-cookie-consent-gtm-varaible-template
