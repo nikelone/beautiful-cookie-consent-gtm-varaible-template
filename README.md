@@ -1,1 +1,1 @@
-# beautiful-cookie-consent-gtm-varaible-template
+# Beautiful Cookie Consent - GTM - variable template
