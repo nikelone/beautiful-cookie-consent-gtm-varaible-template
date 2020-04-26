@@ -77,7 +77,7 @@ if(data.cookieSuffixes){
    if(getCookieValues(cookieName)[0] != "allow"){
    	continue;
    }
-   cookieValueDiff += data.cookieSuffixes[i].cookieSuffix + ",";
+   cookieValueDiff += "-" + data.cookieSuffixes[i].cookieSuffix + "-";
   }
 }
 
