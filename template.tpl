@@ -14,8 +14,8 @@ ___INFO___
   "version": 1,
   "securityGroups": [],
   "displayName": "Beautiful Cookie Banner - Consent Status",
+  "description": "Use this variable together with the wordpress plugin \"Beautiful cookie consent banner\" to easily set up your triggers according the users consent.",
   "categories": ["UTILITY", "ANALYTICS"],
-  "description": "This variable can be used with the wordpress plugin \"beautiful cookie banner\" to set up your triggers according the users consent.",
   "containerContexts": [
     "WEB"
   ]
@@ -30,7 +30,13 @@ ___TEMPLATE_PARAMETERS___
     "name": "cookieName",
     "displayName": "Cookie Name",
     "simpleValueType": true,
-    "defaultValue": "cookieconsent_status"
+    "defaultValue": "cookieconsent_status",
+    "help": "Leave it to default, if you have not changed the value in your wordpress plugin.",
+    "valueValidators": [
+      {
+        "type": "NON_EMPTY"
+      }
+    ]
   },
   {
     "type": "CHECKBOX",
@@ -47,7 +53,17 @@ ___TEMPLATE_PARAMETERS___
         "defaultValue": "",
         "displayName": "Cookie Suffix",
         "name": "cookieSuffix",
-        "type": "TEXT"
+        "type": "TEXT",
+        "valueValidators": [
+          {
+            "type": "STRING_LENGTH",
+            "args": [
+              1,
+              10
+            ]
+          }
+        ],
+        "isUnique": true
       }
     ],
     "newRowButtonText": "Add Cookie Suffix",
@@ -70,6 +86,10 @@ const getCookieValues = require('getCookieValues');
 
 let cookieValueDiff = "";
 let cookieValue = getCookieValues(data.cookieName, false)[0];
+
+if(cookieValue){
+ cookieValue = "-" + cookieValue + "-"; 
+}
 
 if(data.cookieSuffixes){
   for(let i = 0; i < data.cookieSuffixes.length; i += 1){
@@ -122,6 +142,6 @@ scenarios: []
 
 ___NOTES___
 
-Created on 26.4.2020, 13:50:37
+Created on 26.4.2020, 14:53:27
 
 
