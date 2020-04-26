@@ -1,12 +1,4 @@
-﻿___TERMS_OF_SERVICE___
-
-By creating or modifying this file you agree to Google Tag Manager's Community
-Template Gallery Developer Terms of Service available at
-https://developers.google.com/tag-manager/gallery-tos (or such other URL as
-Google may provide), as modified from time to time.
-
-
-___INFO___
+﻿___INFO___
 
 {
   "type": "MACRO",
@@ -15,7 +7,10 @@ ___INFO___
   "securityGroups": [],
   "displayName": "Beautiful Cookie Banner - Consent Status",
   "description": "Use this variable together with the wordpress plugin \"Beautiful cookie consent banner\" to easily set up your triggers according the users consent.",
-  "categories": ["UTILITY", "ANALYTICS"],
+  "categories": [
+    "UTILITY",
+    "ANALYTICS"
+  ],
   "containerContexts": [
     "WEB"
   ]
@@ -26,23 +21,36 @@ ___TEMPLATE_PARAMETERS___
 
 [
   {
-    "type": "TEXT",
-    "name": "cookieName",
-    "displayName": "Cookie Name",
+    "type": "SELECT",
+    "name": "complianceType",
+    "displayName": "Compliance Type",
+    "macrosInSelect": false,
+    "selectItems": [
+      {
+        "value": "info",
+        "displayValue": "Info only"
+      },
+      {
+        "value": "diffConsent",
+        "displayValue": "Differentiated Consent (one \u0026 two Buttons)"
+      },
+      {
+        "value": "optin",
+        "displayValue": "Opt-In"
+      },
+      {
+        "value": "optout",
+        "displayValue": "Opt-Out"
+      }
+    ],
     "simpleValueType": true,
-    "defaultValue": "cookieconsent_status",
-    "help": "Leave it to default, if you have not changed the value in your wordpress plugin.",
+    "alwaysInSummary": true,
+    "defaultValue": "info",
     "valueValidators": [
       {
         "type": "NON_EMPTY"
       }
     ]
-  },
-  {
-    "type": "CHECKBOX",
-    "name": "useDifferentiatedConsent",
-    "checkboxText": "Use differentiated Consent",
-    "simpleValueType": true
   },
   {
     "type": "SIMPLE_TABLE",
@@ -70,9 +78,22 @@ ___TEMPLATE_PARAMETERS___
     "notSetText": "If you use \"Differentiated Consent\" please add at least one cookie suffix.",
     "enablingConditions": [
       {
-        "paramName": "useDifferentiatedConsent",
-        "paramValue": true,
+        "paramName": "complianceType",
+        "paramValue": "diffConsent",
         "type": "EQUALS"
+      }
+    ]
+  },
+  {
+    "type": "TEXT",
+    "name": "cookieName",
+    "displayName": "Cookie Name",
+    "simpleValueType": true,
+    "defaultValue": "cookieconsent_status",
+    "help": "Leave it to default, if you have not changed the value in your wordpress plugin.",
+    "valueValidators": [
+      {
+        "type": "NON_EMPTY"
       }
     ]
   }
@@ -103,6 +124,14 @@ if(data.cookieSuffixes){
 
 if(cookieValueDiff){
  return cookieValueDiff; 
+}
+
+if(!cookieValue && data.complianceType == "optin"){
+ return "-deny-"; 
+}
+
+if(!cookieValue && data.complianceType == "optout"){
+ return "-allow-"; 
 }
 
 return cookieValue;
