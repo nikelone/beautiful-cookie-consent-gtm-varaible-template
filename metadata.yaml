@@ -1,5 +1,5 @@
 homepage: "https://nikel.co"
 documentation: "https://nikel.co/how-tos/beautiful-cookie-banner-how-to-configure-google-tagmanager"
 versions:
-  - sha: e94d4681037154151cb3b42bc6f9010b1fc17246
+  - sha: 7be5461d7d0e60451b59375ce501352f98f00f26
     changeNotes: Initial release.
