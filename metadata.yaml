@@ -1,7 +1,7 @@
 homepage: "https://beautiful-cookie-banner.com/"
 documentation: "https://beautiful-cookie-banner.com/documentation/"
 versions:
-  - sha: 7be5461d7d0e60451b59375ce501352f98f00f26
+  - sha: 4b3e8397d7a3bc54b66a2f8cad559634100822ce
     changeNotes: Updated homepage.
   - sha: 7be5461d7d0e60451b59375ce501352f98f00f26
     changeNotes: Initial release.
